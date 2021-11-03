@@ -18,8 +18,8 @@ const Students = (props) => {
     }
 
     useEffect(() => {
-        loadStudents();
-    }, [newId])
+        loadStudents()
+    })
 
     const handleFullNameChange = e =>{
         setFullName(e.target.value);
@@ -64,88 +64,21 @@ const Students = (props) => {
         setNewId(message.id);
     }
 
-    // const deleteStudent = async(id) =>{
-    //     await fetch(`http://localhost:8001/api/deletestudent/${id}`, {method: 'DELETE'})
-    //     setData(data.filter((student) => student.id !== id))
-    // }
-
-    // async function deleteStudent(studentId){
-    //     const response = await fetch("http://localhost:8001/api/deletestudent?id=" + studentId, {
-    //         method: "POST",
-    //         mode: "cors", 
-    //         cache: "no-cache", 
-    //         credentials: "same-origin",
-    //         headers: {
-    //             "Content-Type": "application/json"            
-    //         },
-    //         redirect: "follow",
-    //         referrerPolicy: "no-referrer",
-    //         body: JSON.stringify(data)
-    //     });
-    // }
-
-    // async function deleteStudent(studentData){
-
-    //     let id = studentId;
-    //     let fullName = studentFullName;
-    //     let university = studentUniversity;
-    //     let faculty = studentFaculty;
-    //     let yearOfStudy = studentYearOfStudy;
-
-    //     let student = {id, fullName, university, faculty, yearOfStudy};
-
-    //     const response = await fetch("http://localhost:8001/api/deletestudent", {
-    //         method: "DELETE", 
-    //         mode: "cors",
-    //         cache: "no-cache",
-    //         credentials: "same-origin",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         redirect: "follow",
-    //         referrerPolicy: "no-referrer",
-    //         body: JSON.stringify(student)
-    //     });
-    //     if(response.status == 200){
-    //         console.log("STUDENT DELETED SUCCESSFULLY!")
-    //     }
-    // }
-
-    // async function getItem(itemId) {
-    //     let response = await fetch("http://localhost:8000/api/getitem/"+itemId);
-    //     if(response.status==200){
-    //         let data = await response.json();
-    //         setData(data);
-    //     }else{
-    //         setMessage("404 STUDENT NOT FOUND");
-    //     }
-    // }
-
-    // async function toDeleteStudent(id){
-    //     await fetch("http://localhost:8001/api/deletestudent/"+id);
-    // }
-
-    // async function toDeleteStudent(id){
-    //     const inputData = getItem(id);
-    //     deleteStudent(inputData);
-    // }
-
-    // async function deleteStudent(data){
-    //     const response = await fetch("http://localhost:8001/api/deletestudent", {
-    //         method: "DELETE",
-    //         mode: "cors",
-    //         cache: "no-cache",
-    //         credentials: "same-origin",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         redirect: "follow",
-    //         referrerPolicy: "no-referrer",
-    //         body: JSON.stringify(data)
-    //         });
-    //         let messData = await response.json();
-    //         setMessage(messData.id ? "Student Data Deleted" : "Error");
-    //     }
+    async function deleteStudent(studentId){
+        console.log(studentId);
+        const response = await fetch(`http://localhost:8001/api/deletestudent?id=${studentId}`, {
+            method: "DELETE",
+            mode: "cors", 
+            cache: "no-cache", 
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"            
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(data)
+        });
+    }
 
     return (
         <div>
@@ -173,7 +106,7 @@ const Students = (props) => {
                                         <td>{row.university}</td>
                                         <td>{row.faculty}</td>
                                         <td>{row.yearOfStudy}</td>
-                                        <td><button type='button' className="btn btn-danger btn-sm">Delete Student</button></td>
+                                        <td><button type='button' className="btn btn-danger btn-sm" onClick={() => deleteStudent(row.id)}>Delete Student</button></td>
                                     </tr>
                                 ))}
                             </tbody>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from './components/Navbar.js';
 import Students from './components/Students.js';
 
 function App() {
