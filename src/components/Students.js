@@ -3,10 +3,10 @@ import Navbar from './Navbar';
 
 const Students = (props) => {
 
-    const [fullName, setFullName] = useState("");
+    const [full_name, setFullName] = useState("");
     const [university, setUniversity] = useState("");
     const [faculty, setFaculty] = useState("");
-    const [yearOfStudy, setYearOfStudy] = useState(0);
+    const [year_of_study, setYearOfStudy] = useState(0);
 
     const [data, setData] = useState([]);
     const [newId, setNewId] = useState(0);
@@ -14,7 +14,7 @@ const Students = (props) => {
     async function loadStudents(){
         let response = await fetch("http://localhost:8001/api/allstudents");
         let result = await response.json();
-        setData(result);     
+        setData(result);
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Students = (props) => {
     const handleFormSubmit = e => {
         e.preventDefault();
 
-        addStudent({"id": newId, "fullName": fullName, "university": university, "faculty": faculty, "yearOfStudy": yearOfStudy})
+        addStudent({"id": newId, "full_name": full_name, "university": university, "faculty": faculty, "year_of_study": year_of_study})
 
         setFullName("");
         setUniversity("");
@@ -102,10 +102,10 @@ const Students = (props) => {
                                 {data?.map(row => (
                                     <tr key = {row.id}>
                                         <td>{row.id}</td>
-                                        <td>{row.fullName}</td>
+                                        <td>{row.full_name}</td>
                                         <td>{row.university}</td>
                                         <td>{row.faculty}</td>
-                                        <td>{row.yearOfStudy}</td>
+                                        <td>{row.year_of_study}</td>
                                         <td><button type='button' className="btn btn-danger btn-sm" onClick={() => deleteStudent(row.id)}>Delete Student</button></td>
                                     </tr>
                                 ))}
